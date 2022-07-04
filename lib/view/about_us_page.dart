@@ -69,430 +69,432 @@ class _AboutUsPageState extends State<AboutUsPage> {
       ),
       body: (aboutData != null && contactData != null)
           ? Padding(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Image.asset(
-                      Images.logo_image,
-                      height: 140,
+              padding: EdgeInsets.all(10),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Image.asset(
+                        Images.logo_image,
+                        height: 140,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 15),
-                  Text(
-                    langProvider.appLanguage == "en"
-                        ? aboutData['title']
-                        : aboutData['title_ar'],
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
+                    SizedBox(height: 15),
+                    Text(
+                      langProvider.appLanguage == "en"
+                          ? aboutData['title']
+                          : aboutData['title_ar'],
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    langProvider.appLanguage == "en"
-                        ? aboutData['details']
-                        : aboutData['details_ar'],
-                    textAlign: TextAlign.left,
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    localize(context, "follow us")!,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
+                    SizedBox(height: 10),
+                    Text(
+                      langProvider.appLanguage == "en"
+                          ? aboutData['details']
+                          : aboutData['details_ar'],
+                      textAlign: TextAlign.left,
+                      style: TextStyle(color: Colors.black),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  //// To Do
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Card(
-                                  elevation: 5,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Container(
-                                    height: 20,
-                                    width: 20,
-                                    margin: EdgeInsets.all(8.0),
-                                    decoration:
-                                        BoxDecoration(shape: BoxShape.circle),
-                                    child: SvgPicture.asset(
-                                      Images.facebook_icon,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 5),
-                                TextButton(
-                                  onPressed: () async {
-                                    await launch(contactData['facebook']);
-                                  },
-                                  child: Text(
-                                    'ZARI Commerce',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: Dimensions.FONT_SIZE_DEFAULT,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                    SizedBox(height: 20),
+                    Text(
+                      localize(context, "follow us")!,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Card(
-                                  elevation: 5,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Container(
-                                    height: 20,
-                                    width: 20,
-                                    margin: EdgeInsets.all(8.0),
-                                    decoration:
-                                        BoxDecoration(shape: BoxShape.circle),
-                                    child: SvgPicture.asset(
-                                      Images.whatsup_icon,
+                    ),
+                    SizedBox(height: 10),
+                    //// To Do
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      margin: EdgeInsets.all(8.0),
+                                      decoration:
+                                          BoxDecoration(shape: BoxShape.circle),
+                                      child: SvgPicture.asset(
+                                        Images.facebook_icon,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 5),
-                                TextButton(
-                                  onPressed: () async {
-                                    WhatsAppUnilink link = WhatsAppUnilink(
-                                      phoneNumber: contactData['whatsaapp'],
-                                      text: "",
-                                    );
+                                  SizedBox(height: 5),
+                                  TextButton(
+                                    onPressed: () async {
+                                      await launch(contactData['facebook']);
+                                    },
+                                    child: Text(
+                                      'ZARI Commerce',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: Dimensions.FONT_SIZE_DEFAULT,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      margin: EdgeInsets.all(8.0),
+                                      decoration:
+                                          BoxDecoration(shape: BoxShape.circle),
+                                      child: SvgPicture.asset(
+                                        Images.whatsup_icon,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  TextButton(
+                                    onPressed: () async {
+                                      WhatsAppUnilink link = WhatsAppUnilink(
+                                        phoneNumber: contactData['whatsaapp'],
+                                        text: "",
+                                      );
 
-                                    await launch("$link");
-                                  },
-                                  child: Text(
-                                    '+201151300876',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: Dimensions.FONT_SIZE_DEFAULT,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
+                                      await launch("$link");
+                                    },
+                                    child: Text(
+                                      '+201151300876',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: Dimensions.FONT_SIZE_DEFAULT,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
-                  ///First Row
-                  SizedBox(height: 10),
-                  //// To Do
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Card(
-                                  elevation: 5,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Container(
-                                    height: 20,
-                                    width: 20,
-                                    margin: EdgeInsets.all(8.0),
-                                    decoration:
-                                        BoxDecoration(shape: BoxShape.circle),
-                                    child: SvgPicture.asset(
-                                      Images.twitter_icon,
+                    ///First Row
+                    SizedBox(height: 10),
+                    //// To Do
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      margin: EdgeInsets.all(8.0),
+                                      decoration:
+                                          BoxDecoration(shape: BoxShape.circle),
+                                      child: SvgPicture.asset(
+                                        Images.twitter_icon,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 5),
-                                TextButton(
-                                  onPressed: () async {
-                                    await launch(contactData['twitter']);
-                                  },
-                                  child: Text(
-                                    'ZARI.Egypt',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: Dimensions.FONT_SIZE_DEFAULT,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
+                                  SizedBox(height: 5),
+                                  TextButton(
+                                    onPressed: () async {
+                                      await launch(contactData['twitter']);
+                                    },
+                                    child: Text(
+                                      'ZARI.Egypt',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: Dimensions.FONT_SIZE_DEFAULT,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Card(
-                                  elevation: 5,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Container(
-                                    height: 20,
-                                    width: 20,
-                                    margin: EdgeInsets.all(8.0),
-                                    decoration:
-                                        BoxDecoration(shape: BoxShape.circle),
-                                    child: SvgPicture.asset(
-                                      Images.call_icon,
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      margin: EdgeInsets.all(8.0),
+                                      decoration:
+                                          BoxDecoration(shape: BoxShape.circle),
+                                      child: SvgPicture.asset(
+                                        Images.call_icon,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 5),
-                                TextButton(
-                                  onPressed: () async {
-                                    await launch(
-                                        "tel: ${contactData['phone']}");
-                                  },
-                                  child: Text(
-                                    '+201151300876',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: Dimensions.FONT_SIZE_DEFAULT,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
+                                  SizedBox(height: 5),
+                                  TextButton(
+                                    onPressed: () async {
+                                      await launch(
+                                          "tel: ${contactData['phone']}");
+                                    },
+                                    child: Text(
+                                      '+201151300876',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: Dimensions.FONT_SIZE_DEFAULT,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
-                  ///Second Row
-                  SizedBox(height: 10),
-                  //// To Do
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Card(
-                                  elevation: 5,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Container(
-                                    height: 20,
-                                    width: 20,
-                                    margin: EdgeInsets.all(8.0),
-                                    decoration:
-                                        BoxDecoration(shape: BoxShape.circle),
-                                    child: Image.asset(
-                                      Images.instagram_icon,
+                    ///Second Row
+                    SizedBox(height: 10),
+                    //// To Do
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      margin: EdgeInsets.all(8.0),
+                                      decoration:
+                                          BoxDecoration(shape: BoxShape.circle),
+                                      child: Image.asset(
+                                        Images.instagram_icon,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 5),
-                                TextButton(
-                                  onPressed: () async {
-                                    await launch(contactData['instagram']);
-                                  },
-                                  child: Text(
-                                    'ZARI.Commerce',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: Dimensions.FONT_SIZE_DEFAULT,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
+                                  SizedBox(height: 5),
+                                  TextButton(
+                                    onPressed: () async {
+                                      await launch(contactData['instagram']);
+                                    },
+                                    child: Text(
+                                      'ZARI.Commerce',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: Dimensions.FONT_SIZE_DEFAULT,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Card(
-                                  elevation: 5,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Container(
-                                    height: 20,
-                                    width: 20,
-                                    margin: EdgeInsets.all(8.0),
-                                    decoration:
-                                        BoxDecoration(shape: BoxShape.circle),
-                                    child: SvgPicture.asset(
-                                      Images.langauge,
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      margin: EdgeInsets.all(8.0),
+                                      decoration:
+                                          BoxDecoration(shape: BoxShape.circle),
+                                      child: SvgPicture.asset(
+                                        Images.langauge,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 2),
-                                TextButton(
-                                  onPressed: () async {
-                                    await launch(contactData['website']);
-                                  },
-                                  child: Text(
-                                    contactData['website'],
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize:
-                                          Dimensions.FONT_SIZE_DEFAULT - 2,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
+                                  SizedBox(height: 2),
+                                  TextButton(
+                                    onPressed: () async {
+                                      await launch(contactData['website']);
+                                    },
+                                    child: Text(
+                                      contactData['website'],
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize:
+                                            Dimensions.FONT_SIZE_DEFAULT - 3,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
-                  ///Third Row
-                  SizedBox(height: 10),
-                  //// To Do
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Card(
-                                  elevation: 5,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Container(
-                                    height: 20,
-                                    width: 20,
-                                    margin: EdgeInsets.all(8.0),
-                                    decoration:
-                                        BoxDecoration(shape: BoxShape.circle),
-                                    child: SvgPicture.asset(
-                                      Images.linkedin_icon,
+                    ///Third Row
+                    SizedBox(height: 10),
+                    //// To Do
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      margin: EdgeInsets.all(8.0),
+                                      decoration:
+                                          BoxDecoration(shape: BoxShape.circle),
+                                      child: SvgPicture.asset(
+                                        Images.linkedin_icon,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 5),
-                                TextButton(
-                                  onPressed: () async {
-                                    await launch(contactData['linkedin']);
-                                  },
-                                  child: Text(
-                                    'ZARI.Egypt',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: Dimensions.FONT_SIZE_DEFAULT,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
+                                  SizedBox(height: 5),
+                                  TextButton(
+                                    onPressed: () async {
+                                      await launch(contactData['linkedin']);
+                                    },
+                                    child: Text(
+                                      'ZARI.Egypt',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: Dimensions.FONT_SIZE_DEFAULT,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Card(
-                                  elevation: 5,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: Container(
-                                    height: 20,
-                                    width: 20,
-                                    margin: EdgeInsets.all(8.0),
-                                    decoration:
-                                        BoxDecoration(shape: BoxShape.circle),
-                                    child: SvgPicture.asset(
-                                      Images.message,
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: Container(
+                                      height: 20,
+                                      width: 20,
+                                      margin: EdgeInsets.all(8.0),
+                                      decoration:
+                                          BoxDecoration(shape: BoxShape.circle),
+                                      child: SvgPicture.asset(
+                                        Images.message,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 5),
-                                TextButton(
-                                  onPressed: () async {
-                                    await launch(contactData['email']);
-                                  },
-                                  child: Text(
-                                    contactData['email'],
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize:
-                                          Dimensions.FONT_SIZE_DEFAULT - 2,
-                                      fontWeight: FontWeight.w400,
-                                      decoration: TextDecoration.underline,
+                                  SizedBox(height: 5),
+                                  TextButton(
+                                    onPressed: () async {
+                                      await launch(contactData['email']);
+                                    },
+                                    child: Text(
+                                      contactData['email'],
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize:
+                                            Dimensions.FONT_SIZE_DEFAULT - 3,
+                                        fontWeight: FontWeight.w400,
+                                        decoration: TextDecoration.underline,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
-                  ///Forth Row
-                ],
+                    ///Forth Row
+                  ],
+                ),
               ),
             )
           : Center(child: CircularProgressIndicator()),

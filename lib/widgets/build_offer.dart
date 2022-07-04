@@ -15,7 +15,7 @@ class BuildTopOffer extends StatelessWidget {
       ),
       elevation: 2,
       child: Container(
-        height: 90,
+        height: 95,
         decoration: BoxDecoration(
           //    color: Colors.amber,
           borderRadius: BorderRadius.circular(10),
@@ -30,9 +30,22 @@ class BuildTopOffer extends StatelessWidget {
                 child: Container(
                   child: Stack(
                     children: [
-                      Image.asset(
-                        Images.offer_card,
+                      FadeInImage.assetNetwork(
+                        placeholder: Images.offer_card,
+                        //   placeholder: 'assets/images/loading.gif',
+                        imageErrorBuilder: (c, o, s) => Image.asset(
+                          Images.offer_card,
+                          fit: BoxFit.cover,
+                          height: 140,
+                        ),
+                        image: Images.offer_card,
+                        fit: BoxFit.cover,
+                        height: 140,
                       ),
+                      // Image.asset(
+                      //   Images.offer_card,
+                      //   scale: 0.5,
+                      // ),
                       Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
@@ -71,6 +84,7 @@ class BuildTopOffer extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -81,7 +95,6 @@ class BuildTopOffer extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 5),
                     Text(
                       'Beauty Salon',
                       maxLines: 5,
@@ -92,7 +105,6 @@ class BuildTopOffer extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SizedBox(height: 7.5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -136,7 +148,7 @@ class BuildRecommendedOffer extends StatelessWidget {
       ),
       elevation: 2,
       child: Container(
-        height: 90,
+        height: 95,
         decoration: BoxDecoration(
           //    color: Colors.amber,
           borderRadius: BorderRadius.circular(10),
@@ -151,8 +163,17 @@ class BuildRecommendedOffer extends StatelessWidget {
                 child: Container(
                   child: Stack(
                     children: [
-                      Image.asset(
-                        Images.offer_card,
+                      FadeInImage.assetNetwork(
+                        placeholder: Images.offer_card,
+                        //   placeholder: 'assets/images/loading.gif',
+                        imageErrorBuilder: (c, o, s) => Image.asset(
+                          Images.offer_card,
+                          fit: BoxFit.cover,
+                          height: 140,
+                        ),
+                        image: Images.offer_card,
+                        fit: BoxFit.cover,
+                        height: 140,
                       ),
                       Align(
                         alignment: Alignment.topLeft,
@@ -199,6 +220,7 @@ class BuildRecommendedOffer extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -209,7 +231,7 @@ class BuildRecommendedOffer extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    //   SizedBox(height: 5),
                     Text(
                       'Beauty Salon',
                       maxLines: 5,
@@ -220,7 +242,7 @@ class BuildRecommendedOffer extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SizedBox(height: 7.5),
+                    //     SizedBox(height: 7.5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -264,7 +286,7 @@ class BuildUpToOffer extends StatelessWidget {
       ),
       elevation: 2,
       child: Container(
-        height: 90,
+        height: 95,
         decoration: BoxDecoration(
           //    color: Colors.amber,
           borderRadius: BorderRadius.circular(10),
@@ -279,8 +301,17 @@ class BuildUpToOffer extends StatelessWidget {
                 child: Container(
                   child: Stack(
                     children: [
-                      Image.asset(
-                        Images.offer_card,
+                      FadeInImage.assetNetwork(
+                        placeholder: Images.offer_card,
+                        //   placeholder: 'assets/images/loading.gif',
+                        imageErrorBuilder: (c, o, s) => Image.asset(
+                          Images.offer_card,
+                          fit: BoxFit.cover,
+                          height: 140,
+                        ),
+                        image: Images.offer_card,
+                        fit: BoxFit.cover,
+                        height: 140,
                       ),
                       Align(
                         alignment: Alignment.topLeft,
@@ -303,7 +334,14 @@ class BuildUpToOffer extends StatelessWidget {
                                   Images.discount,
                                   scale: 35,
                                 ),
-                                Text('35%')
+                                Text(
+                                  '35%',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.black,
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -320,6 +358,7 @@ class BuildUpToOffer extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -330,7 +369,7 @@ class BuildUpToOffer extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    SizedBox(height: 5),
+                    //  SizedBox(height: 5),
                     Text(
                       'Beauty Salon',
                       maxLines: 5,
@@ -341,7 +380,7 @@ class BuildUpToOffer extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SizedBox(height: 7.5),
+                    //   SizedBox(height: 7.5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

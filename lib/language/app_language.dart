@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AppLanguage extends ChangeNotifier{
+class AppLanguage extends ChangeNotifier {
   Locale _appLocale = const Locale("en");
   String _appLanguage = "en";
 
@@ -10,11 +10,12 @@ class AppLanguage extends ChangeNotifier{
     fetchLocale();
     return _appLocale;
   }
+
   String get appLanguage => _appLanguage;
 
-  fetchLocale() async{
+  fetchLocale() async {
     var prefs = await SharedPreferences.getInstance();
-    if (prefs.getString('language_code') == null){
+    if (prefs.getString('language_code') == null) {
       _appLocale = const Locale('en');
       return null;
     }
@@ -22,19 +23,19 @@ class AppLanguage extends ChangeNotifier{
     _appLocale = Locale(prefs.getString('language_code')!);
     _appLanguage = prefs.getString('language_code')!;
     //print('Current Language is ' + _appLocale.languageCode);
-    
+
     notifyListeners();
   }
 
-  void changeLanguage(Locale type) async{
+  void changeLanguage(Locale type) async {
     var prefs = await SharedPreferences.getInstance();
 
-    if (type == Locale('ar')){
+    if (type == Locale('ar')) {
       _appLocale = Locale('ar');
       _appLanguage = "ar";
       prefs.setString('language_code', 'ar');
       prefs.setString('countryCode', '');
-    }else{
+    } else {
       _appLocale = Locale('en');
       _appLanguage = "en";
       prefs.setString('language_code', 'en');
