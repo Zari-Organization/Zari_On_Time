@@ -6,6 +6,8 @@ import 'package:flutter/src/widgets/ticker_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:zari/constants.dart';
 import 'package:zari/language/app_language.dart';
+import 'package:zari/model/core/offers.dart';
+import 'package:zari/model/service/api.dart';
 import 'package:zari/providers/pages_provider.dart';
 import 'package:zari/util/Dimensions.dart';
 import 'package:zari/util/Images.dart';
@@ -22,7 +24,15 @@ class OfferPage extends StatefulWidget {
 
 class _OfferPageState extends State<OfferPage>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  int selectedColor = 0;
+  List<Offers>? offers;
+
+  getAllOffers() async {
+    await Api.getOffers().then((value) {
+      setState(() => offers = value);
+    });
+  }
+
   TextEditingController search = TextEditingController();
   _search(String text) {
     if (text.isEmpty) {
@@ -30,18 +40,20 @@ class _OfferPageState extends State<OfferPage>
       //  getCategories();
     } else {
       print('search2222');
-      // setState(() {
-      //   searchResult = categories!
-      //       .where((e) => e.name!.toLowerCase().contains(text.toLowerCase()))
-      //       .toList();
-      //   print('categories!.length${searchResult.length}');
-
-      // });
+      setState(() {
+        offers = offers!
+            .where((e) =>
+                e.title!.toLowerCase().contains(text.toLowerCase()) ||
+                e.artitle!.toLowerCase().contains(text.toLowerCase()))
+            .toList();
+        print('categories!.length${offers!.length}');
+      });
     }
   }
 
   @override
   void initState() {
+    getAllOffers();
     super.initState();
   }
 
@@ -70,184 +82,208 @@ class _OfferPageState extends State<OfferPage>
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 5),
-              CustomSearch(
-                title: localize(context, "search"),
-                controller: search,
-                search: (v) => _search(v!),
-                prewidget: Image.asset(
-                  Images.search_icon,
-                  color: Colors.grey,
-                  scale: 7,
-                ),
-              ),
-              SizedBox(height: 5),
-              Container(
-                height: 60,
-                width: double.infinity,
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: 10,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => _buildListOffer(),
-                ),
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            localize(context, "topoffers")!,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize:
-                                    Dimensions.FONT_SIZE_EXTRA_LARGE_TWENTY,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                localize(context, "see all")!,
-                                style: TextStyle(
-                                    color: AppColors.YALLOW_BUTTON,
-                                    fontSize: Dimensions.FONT_SIZE_DEFAULT),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color: AppColors.YALLOW_BUTTON,
-                                size: Dimensions.FONT_SIZE_DEFAULT,
-                              ),
-                            ],
-                          ),
-                          // SizedBox(width: 5),
-                        ],
+      body: offers != null
+          ? Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 5),
+                    CustomSearch(
+                      title: localize(context, "search"),
+                      controller: search,
+                      search: (v) => _search(v!),
+                      prewidget: Image.asset(
+                        Images.search_icon,
+                        color: Colors.grey,
+                        scale: 7,
                       ),
-                      SizedBox(height: 5),
-                      Container(
-                        height: 200,
-                        width: double.infinity,
-                        child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          itemCount: 10,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) => BuildTopOffer(),
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      height: 45,
+                      width: double.infinity,
+                      child: ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        itemCount: 10,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => _buildListOffer(index),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          localize(context, "topoffers")!,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE_TWENTY,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              localize(context, "see all")!,
+                              style: TextStyle(
+                                  color: AppColors.YALLOW_BUTTON,
+                                  fontSize: Dimensions.FONT_SIZE_DEFAULT),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: AppColors.YALLOW_BUTTON,
+                              size: Dimensions.FONT_SIZE_DEFAULT,
+                            ),
+                          ],
+                        ),
+                        // SizedBox(width: 5),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            // SizedBox(height: 5),
+                            // Container(
+                            //   height: 200,
+                            //   width: double.infinity,
+                            //   child: ListView.builder(
+                            //     physics: BouncingScrollPhysics(),
+                            //     itemCount: 10,
+                            //     scrollDirection: Axis.vertical,
+                            //     itemBuilder: (context, index) =>
+                            //         BuildTopOffer(),
+                            //   ),
+                            // ),
+                            // SizedBox(height: 5),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   children: [
+                            //     Text(
+                            //       localize(context, "recommendedforyou")!,
+                            //       style: TextStyle(
+                            //           color: Colors.black,
+                            //           fontSize: Dimensions
+                            //               .FONT_SIZE_EXTRA_LARGE_TWENTY,
+                            //           fontWeight: FontWeight.w600),
+                            //     ),
+                            //     Row(
+                            //       children: [
+                            //         Text(
+                            //           localize(context, "see all")!,
+                            //           style: TextStyle(
+                            //               color: AppColors.YALLOW_BUTTON,
+                            //               fontSize:
+                            //                   Dimensions.FONT_SIZE_DEFAULT),
+                            //         ),
+                            //         Icon(
+                            //           Icons.arrow_forward_ios,
+                            //           color: AppColors.YALLOW_BUTTON,
+                            //           size: Dimensions.FONT_SIZE_DEFAULT,
+                            //         ),
+                            //       ],
+                            //     ),
+                            //     // SizedBox(width: 5),
+                            //   ],
+                            // ),
+                            // SizedBox(height: 5),
+                            // Container(
+                            //   height: 200,
+                            //   width: double.infinity,
+                            //   child: ListView.builder(
+                            //     physics: BouncingScrollPhysics(),
+                            //     itemCount: 10,
+                            //     scrollDirection: Axis.vertical,
+                            //     itemBuilder: (context, index) =>
+                            //         BuildRecommendedOffer(),
+                            //   ),
+                            // ),
+                            // SizedBox(height: 5),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   children: [
+                            //     Text(
+                            //       localize(context, "offers up to 60%")!,
+                            //       style: TextStyle(
+                            //           color: Colors.black,
+                            //           fontSize: Dimensions
+                            //               .FONT_SIZE_EXTRA_LARGE_TWENTY,
+                            //           fontWeight: FontWeight.w600),
+                            //     ),
+                            //     Row(
+                            //       children: [
+                            //         Text(
+                            //           localize(context, "see all")!,
+                            //           style: TextStyle(
+                            //               color: AppColors.YALLOW_BUTTON,
+                            //               fontSize:
+                            //                   Dimensions.FONT_SIZE_DEFAULT),
+                            //         ),
+                            //         Icon(
+                            //           Icons.arrow_forward_ios,
+                            //           color: AppColors.YALLOW_BUTTON,
+                            //           size: Dimensions.FONT_SIZE_DEFAULT,
+                            //         ),
+                            //       ],
+                            //     ),
+                            //     // SizedBox(width: 5),
+                            //   ],
+                            // ),
+
+                            offers!.length > 0
+                                ? Container(
+                                    height: 600,
+                                    width: double.infinity,
+                                    child: ListView.builder(
+                                      physics: BouncingScrollPhysics(),
+                                      itemCount: offers!.length,
+                                      scrollDirection: Axis.vertical,
+                                      itemBuilder: (context, index) =>
+                                          BuildUpToOffer(offers![index]),
+                                    ),
+                                  )
+                                : Container(
+                                    height: 600,
+                                    child: Center(
+                                      child: Text(
+                                        localize(context, "noDataFound")!,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                          ],
                         ),
                       ),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            localize(context, "recommendedforyou")!,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize:
-                                    Dimensions.FONT_SIZE_EXTRA_LARGE_TWENTY,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                localize(context, "see all")!,
-                                style: TextStyle(
-                                    color: AppColors.YALLOW_BUTTON,
-                                    fontSize: Dimensions.FONT_SIZE_DEFAULT),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color: AppColors.YALLOW_BUTTON,
-                                size: Dimensions.FONT_SIZE_DEFAULT,
-                              ),
-                            ],
-                          ),
-                          // SizedBox(width: 5),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Container(
-                        height: 200,
-                        width: double.infinity,
-                        child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          itemCount: 10,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) =>
-                              BuildRecommendedOffer(),
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            localize(context, "offers up to 60%")!,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize:
-                                    Dimensions.FONT_SIZE_EXTRA_LARGE_TWENTY,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                localize(context, "see all")!,
-                                style: TextStyle(
-                                    color: AppColors.YALLOW_BUTTON,
-                                    fontSize: Dimensions.FONT_SIZE_DEFAULT),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color: AppColors.YALLOW_BUTTON,
-                                size: Dimensions.FONT_SIZE_DEFAULT,
-                              ),
-                            ],
-                          ),
-                          // SizedBox(width: 5),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      Container(
-                        height: 200,
-                        width: double.infinity,
-                        child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          itemCount: 10,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) => BuildUpToOffer(),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
+            )
+          : Center(child: CircularProgressIndicator()),
     );
   }
 
-  _buildListOffer() {
+  _buildListOffer(int index) {
     final langProvider = Provider.of<AppLanguage>(context, listen: false);
     final pagesProvider = Provider.of<PagesProvider>(context, listen: false);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      color: AppColors.YALLOW_BUTTON,
+      color: selectedColor == index
+          ? AppColors.YALLOW_BUTTON
+          : Colors.grey.shade400,
       elevation: 2,
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          setState(() {
+            selectedColor = index;
+          });
+        },
         child: Container(
           //  width: 40,
           decoration: BoxDecoration(

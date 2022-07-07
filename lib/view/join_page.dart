@@ -111,16 +111,15 @@ class _JoinPageState extends State<JoinPage> {
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        localize(context, "name")!,
+                        localize(context, "namebrand")!,
                         style: TextStyle(fontSize: Dimensions.FONT_SIZE_LARGE),
                       )),
                   SizedBox(height: 5),
                   CustomField(
-                    title: localize(context, "name"),
                     controller: name,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return localize(context, "nameRequired");
+                        return localize(context, "namebrandRequired");
                       }
                     },
                   ),
@@ -133,7 +132,6 @@ class _JoinPageState extends State<JoinPage> {
                       )),
                   SizedBox(height: 5),
                   CustomField(
-                    title: localize(context, "Phone number"),
                     controller: mobile,
                     inputType: TextInputType.phone,
                     validator: (value) {
@@ -154,14 +152,13 @@ class _JoinPageState extends State<JoinPage> {
                       )),
                   SizedBox(height: 5),
                   CustomField(
-                    title: localize(context, "email"),
                     controller: email,
                   ),
                   SizedBox(height: 10),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        localize(context, "selectCategory")!,
+                        localize(context, "category")!,
                         style: TextStyle(fontSize: Dimensions.FONT_SIZE_LARGE),
                       )),
                   SizedBox(height: 5),
@@ -208,160 +205,160 @@ class _JoinPageState extends State<JoinPage> {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        localize(context, "selectCountry")!,
-                        style: TextStyle(fontSize: Dimensions.FONT_SIZE_LARGE),
-                      )),
-                  SizedBox(height: 5),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.CUSTOM_FEILD_GRAY,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: DropdownButton<Country>(
-                      underline: Container(),
-                      isExpanded: true,
-                      icon: Icon(
-                        Icons.keyboard_arrow_down_outlined,
-                        color: Colors.grey,
-                      ),
-                      dropdownColor: Colors.white,
-                      elevation: 5,
-                      value: selectedCountry,
-                      hint: Text(
-                        localize(context, "selectCountry")!,
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      onChanged: (value) => setState(() {
-                        selectedCountry = value;
-                        getCities(selectedCountry!.id);
-                      }),
-                      items: countries != null
-                          ? countries!
-                              .map(
-                                (e) => DropdownMenuItem(
-                                  child: Text(
-                                    langProvider.appLanguage == "en"
-                                        ? e.name!
-                                        : e.arname!,
-                                    style: TextStyle(
-                                        color: AppColors.FONT_DROPDOWN),
-                                  ),
-                                  value: e,
-                                ),
-                              )
-                              .toList()
-                          : null,
-                    ),
-                  ),
+                  // Align(
+                  //     alignment: Alignment.centerLeft,
+                  //     child: Text(
+                  //       localize(context, "selectCountry")!,
+                  //       style: TextStyle(fontSize: Dimensions.FONT_SIZE_LARGE),
+                  //     )),
+                  // SizedBox(height: 5),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     color: AppColors.CUSTOM_FEILD_GRAY,
+                  //     borderRadius: BorderRadius.all(Radius.circular(10)),
+                  //   ),
+                  //   child: DropdownButton<Country>(
+                  //     underline: Container(),
+                  //     isExpanded: true,
+                  //     icon: Icon(
+                  //       Icons.keyboard_arrow_down_outlined,
+                  //       color: Colors.grey,
+                  //     ),
+                  //     dropdownColor: Colors.white,
+                  //     elevation: 5,
+                  //     value: selectedCountry,
+                  //     hint: Text(
+                  //       localize(context, "selectCountry")!,
+                  //       style: TextStyle(
+                  //         color: Colors.grey,
+                  //       ),
+                  //     ),
+                  //     onChanged: (value) => setState(() {
+                  //       selectedCountry = value;
+                  //       getCities(selectedCountry!.id);
+                  //     }),
+                  //     items: countries != null
+                  //         ? countries!
+                  //             .map(
+                  //               (e) => DropdownMenuItem(
+                  //                 child: Text(
+                  //                   langProvider.appLanguage == "en"
+                  //                       ? e.name!
+                  //                       : e.arname!,
+                  //                   style: TextStyle(
+                  //                       color: AppColors.FONT_DROPDOWN),
+                  //                 ),
+                  //                 value: e,
+                  //               ),
+                  //             )
+                  //             .toList()
+                  //         : null,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 10),
+                  // Align(
+                  //     alignment: Alignment.centerLeft,
+                  //     child: Text(
+                  //       localize(context, "selectCity")!,
+                  //       style: TextStyle(fontSize: Dimensions.FONT_SIZE_LARGE),
+                  //     )),
+                  // SizedBox(height: 5),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     color: AppColors.CUSTOM_FEILD_GRAY,
+                  //     borderRadius: BorderRadius.all(Radius.circular(10)),
+                  //   ),
+                  //   child: DropdownButton<City>(
+                  //     underline: Container(),
+                  //     isExpanded: true,
+                  //     icon: Icon(
+                  //       Icons.keyboard_arrow_down_outlined,
+                  //       color: Colors.grey,
+                  //     ),
+                  //     dropdownColor: Colors.white,
+                  //     value: selectedCity,
+                  //     hint: Text(
+                  //       localize(context, "selectCity")!,
+                  //       style: TextStyle(
+                  //         color: Colors.grey,
+                  //       ),
+                  //     ),
+                  //     onChanged: (value) => setState(() {
+                  //       selectedCity = value;
+                  //       getRegions(selectedCity!.id);
+                  //     }),
+                  //     items: cities != null
+                  //         ? cities!
+                  //             .map(
+                  //               (e) => DropdownMenuItem(
+                  //                 child: Text(
+                  //                   langProvider.appLanguage == "en"
+                  //                       ? e.name!
+                  //                       : e.arname!,
+                  //                   style: TextStyle(
+                  //                       color: AppColors.FONT_DROPDOWN),
+                  //                 ),
+                  //                 value: e,
+                  //               ),
+                  //             )
+                  //             .toList()
+                  //         : null,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 10),
+                  // Align(
+                  //     alignment: Alignment.centerLeft,
+                  //     child: Text(
+                  //       localize(context, "selectRegion")!,
+                  //       style: TextStyle(fontSize: Dimensions.FONT_SIZE_LARGE),
+                  //     )),
+                  // SizedBox(height: 5),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     color: AppColors.CUSTOM_FEILD_GRAY,
+                  //     borderRadius: BorderRadius.all(Radius.circular(10)),
+                  //   ),
+                  //   child: DropdownButton<Region>(
+                  //     underline: Container(),
+                  //     isExpanded: true,
+                  //     icon: Icon(
+                  //       Icons.keyboard_arrow_down_outlined,
+                  //       color: Colors.grey,
+                  //     ),
+                  //     dropdownColor: Colors.white,
+                  //     value: selectedRegion,
+                  //     hint: Text(
+                  //       localize(context, "selectRegion")!,
+                  //       style: TextStyle(
+                  //         color: Colors.grey,
+                  //       ),
+                  //     ),
+                  //     onChanged: (value) => setState(() {
+                  //       selectedRegion = value;
+                  //     }),
+                  //     items: regions != null
+                  //         ? regions!
+                  //             .map(
+                  //               (e) => DropdownMenuItem(
+                  //                 child: Text(
+                  //                   langProvider.appLanguage == "en"
+                  //                       ? e.name!
+                  //                       : e.arname!,
+                  //                   style: TextStyle(
+                  //                       color: AppColors.FONT_DROPDOWN),
+                  //                 ),
+                  //                 value: e,
+                  //               ),
+                  //             )
+                  //             .toList()
+                  //         : null,
+                  //   ),
+                  // ),
                   SizedBox(height: 10),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        localize(context, "selectCity")!,
-                        style: TextStyle(fontSize: Dimensions.FONT_SIZE_LARGE),
-                      )),
-                  SizedBox(height: 5),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.CUSTOM_FEILD_GRAY,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: DropdownButton<City>(
-                      underline: Container(),
-                      isExpanded: true,
-                      icon: Icon(
-                        Icons.keyboard_arrow_down_outlined,
-                        color: Colors.grey,
-                      ),
-                      dropdownColor: Colors.white,
-                      value: selectedCity,
-                      hint: Text(
-                        localize(context, "selectCity")!,
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      onChanged: (value) => setState(() {
-                        selectedCity = value;
-                        getRegions(selectedCity!.id);
-                      }),
-                      items: cities != null
-                          ? cities!
-                              .map(
-                                (e) => DropdownMenuItem(
-                                  child: Text(
-                                    langProvider.appLanguage == "en"
-                                        ? e.name!
-                                        : e.arname!,
-                                    style: TextStyle(
-                                        color: AppColors.FONT_DROPDOWN),
-                                  ),
-                                  value: e,
-                                ),
-                              )
-                              .toList()
-                          : null,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        localize(context, "selectRegion")!,
-                        style: TextStyle(fontSize: Dimensions.FONT_SIZE_LARGE),
-                      )),
-                  SizedBox(height: 5),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.CUSTOM_FEILD_GRAY,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: DropdownButton<Region>(
-                      underline: Container(),
-                      isExpanded: true,
-                      icon: Icon(
-                        Icons.keyboard_arrow_down_outlined,
-                        color: Colors.grey,
-                      ),
-                      dropdownColor: Colors.white,
-                      value: selectedRegion,
-                      hint: Text(
-                        localize(context, "selectRegion")!,
-                        style: TextStyle(
-                          color: Colors.grey,
-                        ),
-                      ),
-                      onChanged: (value) => setState(() {
-                        selectedRegion = value;
-                      }),
-                      items: regions != null
-                          ? regions!
-                              .map(
-                                (e) => DropdownMenuItem(
-                                  child: Text(
-                                    langProvider.appLanguage == "en"
-                                        ? e.name!
-                                        : e.arname!,
-                                    style: TextStyle(
-                                        color: AppColors.FONT_DROPDOWN),
-                                  ),
-                                  value: e,
-                                ),
-                              )
-                              .toList()
-                          : null,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        localize(context, "selectRegion")!,
+                        localize(context, "description")!,
                         style: TextStyle(fontSize: Dimensions.FONT_SIZE_LARGE),
                       )),
                   SizedBox(height: 5),
@@ -390,7 +387,9 @@ class _JoinPageState extends State<JoinPage> {
                   SizedBox(height: 15),
                   CustomButton(
                     title: localize(context, "joinUs"),
-                    onClick: join,
+                    onClick: () {
+                      join();
+                    },
                     colors: 0,
                   ),
                 ],
@@ -404,6 +403,7 @@ class _JoinPageState extends State<JoinPage> {
 
   join() async {
     if (formKey.currentState!.validate()) {
+      print('selectedCategory!.id ${selectedCategory!.id}');
       String params;
       if (PrefManager.currentUser != null) {
         params = "name=${name.text}"
@@ -411,18 +411,18 @@ class _JoinPageState extends State<JoinPage> {
             "&email=${email.text}"
             "&catid=${selectedCategory!.id}"
             "&custid=${PrefManager.currentUser!.custId}"
-            "&country=${selectedCountry!.id}"
-            "&city=${selectedCity!.id}"
-            "&region=${selectedRegion!.id}"
+            "&country=5"
+            "&city=5"
+            "&region=5"
             "&message=${message.text}";
       } else {
         params = "name=${name.text}"
             "&mobile=${mobile.text}"
             "&email=${email.text}"
             "&catid=${selectedCategory!.id}"
-            "&country=${selectedCountry!.id}"
-            "&city=${selectedCity!.id}"
-            "&region=${selectedRegion!.id}"
+            "&country=5"
+            "&city=5"
+            "&region=5"
             "&message=${message.text}";
       }
       setState(() => loading = true);

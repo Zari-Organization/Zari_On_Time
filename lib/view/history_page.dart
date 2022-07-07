@@ -68,47 +68,44 @@ class _HistoryPageState extends State<HistoryPage> {
         elevation: 0,
         automaticallyImplyLeading: false,
       ),
-      body: PrefManager.currentUser != null
-          ? histories != null
-              ? histories!.isNotEmpty
-                  ? Padding(
-                      padding: EdgeInsets.all(5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 10),
-                          Expanded(
-                            child: ListView.builder(
-                              physics: BouncingScrollPhysics(),
-                              itemCount: histories!.length,
-                              itemBuilder: (_, index) =>
-                                  _buildHistory(histories![index]),
-                            ),
-                          ),
-                        ],
+      body: histories != null
+          ? histories!.isNotEmpty
+              ? Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 10),
+                      Expanded(
+                        child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          itemCount: histories!.length,
+                          itemBuilder: (_, index) =>
+                              _buildHistory(histories![index]),
+                        ),
                       ),
-                    )
-                  : Center(
-                      child: Column(
-                      children: [
-                        SizedBox(height: 25),
-                        SvgPicture.asset(
-                          Images.calender,
-                          height: 300,
-                          width: 300,
-                        ),
-                        Text(
-                          localize(context, "you don't have any reservation")!,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize:
-                                  Dimensions.FONT_SIZE_EXTRA_LARGE_TWENTY),
-                        ),
-                      ],
-                    ))
-              : Center(child: CircularProgressIndicator())
-          : NeedLoginWidget(),
+                    ],
+                  ),
+                )
+              : Center(
+                  child: Column(
+                  children: [
+                    SizedBox(height: 25),
+                    SvgPicture.asset(
+                      Images.calender,
+                      height: 300,
+                      width: 300,
+                    ),
+                    Text(
+                      localize(context, "you don't have any reservation")!,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: Dimensions.FONT_SIZE_EXTRA_LARGE_TWENTY),
+                    ),
+                  ],
+                ))
+          : Center(child: CircularProgressIndicator()),
     );
   }
 

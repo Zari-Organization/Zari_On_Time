@@ -91,7 +91,7 @@ class _ContactPageState extends State<ContactPage> {
                             )),
                         SizedBox(height: 5),
                         CustomField(
-                          title: localize(context, "name"),
+                          //   title: localize(context, "name"),
                           controller: name,
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -109,7 +109,7 @@ class _ContactPageState extends State<ContactPage> {
                             )),
                         SizedBox(height: 5),
                         CustomField(
-                          title: localize(context, "Phone number"),
+                          //   title: localize(context, "Phone number"),
                           controller: mobile,
                           inputType: TextInputType.phone,
                           validator: (value) {
@@ -131,14 +131,14 @@ class _ContactPageState extends State<ContactPage> {
                             )),
                         SizedBox(height: 5),
                         CustomField(
-                          title: localize(context, "email"),
+                          //      title: localize(context, "email"),
                           controller: email,
                         ),
                         SizedBox(height: 10),
                         Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              localize(context, "message")!,
+                              localize(context, "messages")!,
                               style: TextStyle(
                                   fontSize: Dimensions.FONT_SIZE_LARGE),
                             )),
@@ -159,7 +159,7 @@ class _ContactPageState extends State<ContactPage> {
                             },
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: localize(context, "message"),
+                              hintText: localize(context, "yourmessage"),
                               hintStyle: TextStyle(color: Colors.grey),
                             ),
                           ),
@@ -481,8 +481,8 @@ class _ContactPageState extends State<ContactPage> {
           message.clear();
         }
       }).then((value) {
-        // Navigator.of(context)
-        //     .push(MaterialPageRoute(builder: (_) => MessagePage()));
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (_) => MessagePage()));
       });
     }
   }

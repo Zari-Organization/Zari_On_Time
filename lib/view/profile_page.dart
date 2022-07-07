@@ -194,14 +194,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (_) => LoginPage()),
+                                      builder: (_) => LoginPage('First')),
                                   (route) => false,
                                 );
                               });
                             } else {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (_) => LoginPage()),
+                                MaterialPageRoute(
+                                    builder: (_) => LoginPage('First')),
                               );
                             }
                           },

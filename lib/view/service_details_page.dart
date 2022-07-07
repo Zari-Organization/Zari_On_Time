@@ -88,8 +88,8 @@ class _ServiceDetailsPageState extends State<ServiceDetailsPage> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      selectedService!.desc! == null
-                          ? 'Samer'
+                      selectedService!.desc == null
+                          ? ''
                           : langProvider.appLanguage == "en"
                               ? selectedService!.name!
                               : selectedService!.arname!,
@@ -104,9 +104,11 @@ class _ServiceDetailsPageState extends State<ServiceDetailsPage> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      langProvider.appLanguage == "en"
-                          ? selectedService!.desc!
-                          : selectedService!.ardesc!,
+                      selectedService!.desc == null
+                          ? ''
+                          : langProvider.appLanguage == "en"
+                              ? selectedService!.desc!
+                              : selectedService!.ardesc!,
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black,
@@ -145,6 +147,7 @@ class _ServiceDetailsPageState extends State<ServiceDetailsPage> {
   bookService() async {
     final pagesProvider = Provider.of<PagesProvider>(context, listen: false);
     if (PrefManager.currentUser == null) {
+      print('hereeeeeeee');
       /*AwesomeDialog(
         context: context,
         animType: AnimType.SCALE,
@@ -176,12 +179,16 @@ class _ServiceDetailsPageState extends State<ServiceDetailsPage> {
           ),
         ),
       ).show();*/
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (_) => LoginPage()),
-        (r) => false,
+
+      // Navigator.pushAndRemoveUntil(
+      //   context,
+      //   MaterialPageRoute(builder: (_) => LoginPage()),
+      //   (route) => false,
+      // );
+      // return;
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => LoginPage('Pop')),
       );
-      return;
     }
 
     DateTime now = DateTime.now();
@@ -191,7 +198,7 @@ class _ServiceDetailsPageState extends State<ServiceDetailsPage> {
     String params = "custid=${PrefManager.currentUser!.custId}"
         "&brandid=${selectedBrand!.id}"
         "&branchid=${selectedBranch!.id}"
-        "&branchid=${selectedBranch!.id}"
+        "&serviceid=${selectedService!.id}"
         "&date=$dateTime";
 
     print("&brandid=${selectedBrand!.id}");

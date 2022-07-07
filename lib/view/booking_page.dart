@@ -30,25 +30,34 @@ class _BookingPageState extends State<BookingPage> {
   Future getBookDetails() async {
     await Api.getHistory(currentBookID).then((value) {
       setState(() => history = value);
-      print(history!.id);
-      // print("clientName :${history!.clientName}");
-      // print('history!.date :${history!.date}');
+      print('history!.id is :${history!}');
+      print('history!.id is :${history!.id}');
+      print("clientName :${history!.clientName}");
+      print('history!.date :${history!.date}');
+      print('history!.name :${history!.name}');
     });
   }
 
   static String _date(String date) {
     DateTime tempDate = DateFormat("yyyy/MM/dd HH:mm").parse(date);
     // DateFormat..add_jms().format(tempDate);
-    String date1 = DateFormat("d MMM y HH:mm").add_jms().format(tempDate);
+    String date1 = DateFormat("d MMM y").format(tempDate);
     return date1;
   }
 
-  String formatTimeOfDay(TimeOfDay tod) {
-    final now = new DateTime.now();
-    final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
-    final format = DateFormat.jm(); //"6:00 AM"
-    return format.format(dt);
+  static String _Time(String date) {
+    DateTime tempDate = DateFormat("yyyy/MM/dd HH:mm").parse(date);
+    // DateFormat..add_jms().format(tempDate);
+    String date1 = DateFormat().add_jms().format(tempDate);
+    return date1;
   }
+
+  // String formatTimeOfDay(TimeOfDay tod) {
+  //   final now = new DateTime.now();
+  //   final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
+  //   final format = DateFormat.jm(); //"6:00 AM"
+  //   return format.format(dt);
+  // }
 
   calculateTimeRemaining() {
     DateTime firstDate = DateFormat("yyyy/MM/dd HH:mm").parse(history!.date!);
@@ -135,11 +144,12 @@ class _BookingPageState extends State<BookingPage> {
                             //                                     ),
                             Center(
                               child: Text(
+                                //            '',
                                 history!.clientName!.isEmpty
                                     ? 'Marwa'
                                     : "${history!.clientName}",
-                                //  "${history!.clientName}",
-                                //     history!.number.toString(),
+                                //       "${history!.clientName}",
+                                //          history!.number.toString(),
                                 style: TextStyle(
                                   fontSize: Dimensions.FONT_SIZE_MAX_LARGE,
                                   color: Colors.black,
@@ -171,8 +181,8 @@ class _BookingPageState extends State<BookingPage> {
                                           SizedBox(height: 5),
                                           Text(
                                             langProvider.appLanguage == "en"
-                                                ? history!.name!
-                                                : history!.arname!,
+                                                ? history!.name ?? ''
+                                                : history!.arname ?? '',
                                             style: TextStyle(
                                                 fontSize: Dimensions
                                                     .FONT_SIZE_EXTRA_LARGE_TWENTY,
@@ -242,8 +252,8 @@ class _BookingPageState extends State<BookingPage> {
                                           SizedBox(height: 5),
                                           Text(
                                             langProvider.appLanguage == "en"
-                                                ? history!.serName!
-                                                : history!.serArname!,
+                                                ? history!.serName ?? ''
+                                                : history!.serArname ?? '',
                                             style: TextStyle(
                                                 fontSize: Dimensions
                                                     .FONT_SIZE_EXTRA_LARGE_TWENTY,
@@ -310,8 +320,7 @@ class _BookingPageState extends State<BookingPage> {
                                           ),
                                           SizedBox(height: 5),
                                           Text(
-                                            _date(history!.date ?? '')
-                                                .substring(0, 11),
+                                            _date(history!.date ?? ''),
                                             style: TextStyle(
                                                 fontSize: Dimensions
                                                     .FONT_SIZE_EXTRA_LARGE_TWENTY,
@@ -339,8 +348,8 @@ class _BookingPageState extends State<BookingPage> {
                                             ),
                                             SizedBox(height: 5),
                                             Text(
-                                              _date(history!.date ?? '')
-                                                  .substring(18, 29),
+                                              //      '',
+                                              _Time(history!.date ?? ''),
                                               style: TextStyle(
                                                   fontSize: Dimensions
                                                       .FONT_SIZE_EXTRA_LARGE_TWENTY,

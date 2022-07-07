@@ -79,7 +79,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                         )),
                     SizedBox(height: 5),
                     CustomField(
-                      title: localize(context, "mobile"),
+                      //    title: localize(context, "mobile"),
                       controller: mobile,
                       inputType: TextInputType.phone,
                       validator: (value) {
@@ -95,6 +95,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
                     CustomButton(
                       title: localize(context, "sendCode"),
                       onClick: sendCode,
+                      colors: 0,
                     ),
                   ],
                 ),
@@ -108,6 +109,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
   sendCode() async {
     if (formKey.currentState!.validate()) {
+      print('sendCode');
       if (mobile.text.isNotEmpty) {
         setState(() => loading = true);
         String params = "mobile=${mobile.text}";

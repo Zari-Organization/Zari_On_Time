@@ -148,6 +148,10 @@ class _BranchesPageState extends State<BranchesPage> {
   }
 
   _buildBranch(Branch branch) {
+    print('branch id is : ${branch.id}');
+    print('branch name is : ${branch.name}');
+    //    print('branch image is : ${branch.image}');
+    print('branch image is : ${branch.desc}');
     final langProvider = Provider.of<AppLanguage>(context, listen: false);
     final pagesProvider = Provider.of<PagesProvider>(context, listen: false);
     return Card(
@@ -160,7 +164,7 @@ class _BranchesPageState extends State<BranchesPage> {
           Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => ServicesPage()),
           );
-          //  pagesProvider.setPage("services");
+          pagesProvider.setPage("services");
           selectedBranch = branch;
         },
         child: Container(

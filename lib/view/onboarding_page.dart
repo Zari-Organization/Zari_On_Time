@@ -58,7 +58,13 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.only(top: 16, right: 16),
-            child: Text(localize(context, "skip")!),
+            child: InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => WelcomePage()),
+                  );
+                },
+                child: Text(localize(context, "skip")!)),
           ),
         ),
       ),

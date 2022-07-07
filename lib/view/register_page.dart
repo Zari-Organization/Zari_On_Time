@@ -87,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           )),
                       SizedBox(height: 5),
                       CustomField(
-                        title: localize(context, "name"),
+                        //  title: localize(context, "name"),
                         controller: name,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -105,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           )),
                       SizedBox(height: 5),
                       CustomField(
-                        title: localize(context, "mobile"),
+                        //    title: localize(context, "mobile"),
                         controller: mobile,
                         inputType: TextInputType.phone,
                         validator: (value) {
@@ -127,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           )),
                       SizedBox(height: 5),
                       CustomField(
-                        title: localize(context, "email"),
+                        //     title: localize(context, "email"),
                         controller: email,
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -301,7 +301,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           )),
                       SizedBox(height: 5),
                       CustomField(
-                        title: localize(context, "password"),
+                        //    title: localize(context, "password"),
                         controller: password,
                         obsecure: true,
                         validator: (value) {
@@ -320,7 +320,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           )),
                       SizedBox(height: 5),
                       CustomField(
-                        title: localize(context, "confirmPassword"),
+                        //           title: localize(context, "confirmPassword"),
                         controller: confirmPassword,
                         obsecure: true,
                         validator: (value) {

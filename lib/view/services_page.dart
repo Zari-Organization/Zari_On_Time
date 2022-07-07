@@ -113,6 +113,10 @@ class _ServicesPageState extends State<ServicesPage> {
   }
 
   _buildService(Service service) {
+    print('service id is : ${service.id}');
+    print('service name is : ${service.name}');
+    print('branch image is : ${service.image}');
+    print('service desc is : ${service.desc}');
     final langProvider = Provider.of<AppLanguage>(context, listen: false);
     final pagesProvider = Provider.of<PagesProvider>(context, listen: false);
     return Card(
@@ -126,12 +130,13 @@ class _ServicesPageState extends State<ServicesPage> {
           print('service id:   ${service.id}');
           print('service name:   ${service.name}');
           print('service desc:   ${service.desc}');
-
+          selectedService = service;
+          pagesProvider.setPage("historyDetails");
           Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => ServiceDetailsPage()),
           );
-          //   pagesProvider.setPage("historyDetails");
-          selectedService = service;
+
+          //  selectedService = service;
         },
         child: Container(
           decoration: BoxDecoration(

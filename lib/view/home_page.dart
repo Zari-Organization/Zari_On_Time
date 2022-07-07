@@ -15,6 +15,7 @@ import 'package:zari/util/Dimensions.dart';
 import 'package:zari/util/style.dart';
 import 'package:zari/view/brands_page.dart';
 import 'package:zari/view/menu_page.dart';
+import 'package:zari/view/welcome_page.dart';
 import 'package:zari/widgets/custom_field.dart';
 
 class HomePage extends StatefulWidget {
@@ -48,7 +49,11 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => WelcomePage()),
+            );
+          },
           icon: Icon(
             Icons.arrow_back_ios,
             color: Colors.black,
@@ -112,13 +117,14 @@ class _HomePageState extends State<HomePage> {
       elevation: 5,
       child: GestureDetector(
         onTap: () {
+          pagesProvider.setPage("brands");
           Navigator.of(context).push(
             MaterialPageRoute(
                 builder: (_) => BrandsPage(langProvider.appLanguage == "en"
                     ? category.name
                     : category.arname)),
           );
-          //  pagesProvider.setPage("brands");
+
           selectedCategory = category;
         },
         child: Container(

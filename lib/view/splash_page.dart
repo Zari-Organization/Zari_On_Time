@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zari/prefs/pref_manager.dart';
 
 import 'package:zari/util/style.dart';
@@ -16,32 +17,37 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  @override
-  void initState() {
-    if (PrefManager.currentUser == null) {
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? false);
+
+    if (_seen) {
       Timer(
-        Duration(seconds: 2),
+        Duration(seconds: 3),
         () {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (_) => OnBoardingPage()),
+          Navigator.of(context).pushAndRemoveUntil(
+            new MaterialPageRoute(builder: (context) => new WelcomePage()),
             (_) => false,
           );
         },
       );
     } else {
       Timer(
-        Duration(seconds: 3),
-        () {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (_) => WelcomePage()),
+        Duration(seconds: 2),
+        () async {
+          await prefs.setBool('seen', true);
+          Navigator.of(context).pushAndRemoveUntil(
+            new MaterialPageRoute(builder: (context) => new OnBoardingPage()),
             (_) => false,
           );
         },
       );
     }
+  }
 
+  @override
+  void initState() {
+    checkFirstSeen();
     super.initState();
   }
 

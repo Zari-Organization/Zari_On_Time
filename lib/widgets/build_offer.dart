@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
+import 'package:zari/language/app_language.dart';
+import 'package:zari/model/core/offers.dart';
 import 'package:zari/util/Images.dart';
 import 'package:zari/util/style.dart';
 
@@ -276,10 +279,12 @@ class BuildRecommendedOffer extends StatelessWidget {
 }
 
 class BuildUpToOffer extends StatelessWidget {
-  const BuildUpToOffer({Key? key}) : super(key: key);
+  Offers? offers;
+  BuildUpToOffer(this.offers);
 
   @override
   Widget build(BuildContext context) {
+    final langProvider = Provider.of<AppLanguage>(context, listen: false);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -362,7 +367,9 @@ class BuildUpToOffer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Bellandon Beauty Center',
+                      langProvider.appLanguage == "en"
+                          ? '${offers!.title}'
+                          : '${offers!.artitle}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
@@ -371,7 +378,9 @@ class BuildUpToOffer extends StatelessWidget {
                     ),
                     //  SizedBox(height: 5),
                     Text(
-                      'Beauty Salon',
+                      langProvider.appLanguage == "en"
+                          ? '${offers!.catName}'
+                          : '${offers!.catArname}',
                       maxLines: 5,
                       style: TextStyle(
                         color: Colors.grey,

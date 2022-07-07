@@ -4,9 +4,12 @@ import 'package:zari/model/core/brand.dart';
 import 'package:zari/model/core/category.dart';
 import 'package:zari/model/core/city.dart';
 import 'package:zari/model/core/country.dart';
+import 'package:zari/model/core/have_fun.dart';
 import 'package:zari/model/core/history.dart';
+import 'package:zari/model/core/offers.dart';
 import 'package:zari/model/core/region.dart';
 import 'package:zari/model/core/service.dart';
+import 'package:zari/model/core/to_night.dart';
 
 class Api {
   static const String baseUrl = "http://162.0.222.73:7001/zariontime/services?";
@@ -118,10 +121,50 @@ class Api {
     }
   }
 
+  static Future<List<Offers>?> getOffers() async {
+    String endPoint = baseUrl + "action=offers";
+
+    Response response = await Dio().get(endPoint);
+    if (response.statusCode == 200) {
+      List data = response.data;
+      List<Offers> services = data.map((e) => Offers.fromJson(e)).toList();
+      return services;
+    } else {
+      return null;
+    }
+  }
+
+  static Future<List<HaveFun>?> getHave_fun() async {
+    String endPoint = baseUrl + "action=offers";
+
+    Response response = await Dio().get(endPoint);
+    if (response.statusCode == 200) {
+      List data = response.data;
+      List<HaveFun> services = data.map((e) => HaveFun.fromJson(e)).toList();
+      return services;
+    } else {
+      return null;
+    }
+  }
+
+  static Future<List<ToNight>?> getToNight() async {
+    String endPoint = baseUrl + "action=offers";
+
+    Response response = await Dio().get(endPoint);
+    if (response.statusCode == 200) {
+      List data = response.data;
+      List<ToNight> services = data.map((e) => ToNight.fromJson(e)).toList();
+      return services;
+    } else {
+      return null;
+    }
+  }
+
   static Future bookService(String params) async {
     String endPoint = baseUrl + "action=book&$params";
     print(endPoint);
     Response response = await Dio().post(endPoint);
+    print(response.data);
     return response.data;
   }
 
@@ -132,6 +175,7 @@ class Api {
     if (response.statusCode == 200) {
       List data = response.data;
       List<History> services = data.map((e) => History.fromJson(e)).toList();
+
       return services;
     } else {
       return null;
@@ -146,6 +190,8 @@ class Api {
     if (response.statusCode == 200) {
       var data = response.data;
       History service = History.fromJson(data);
+      print('response.data is :${response.data}');
+      print('response.data is :${service}');
       return service;
     } else {
       return null;
@@ -190,15 +236,17 @@ class Api {
 
   static Future forgetPassword(String params) async {
     String url = baseUrl + "action=rest_pass&$params";
-
+    print('forgetPassword URL is : $url');
     Response response = await Dio().post(url);
+    print('forgetPassword URL is : ${response.data}');
     return response.data;
   }
 
   static Future checkOtp(String params) async {
     String url = baseUrl + "action=check_otp&$params";
-
+    print('checkOtp URL is : $url');
     Response response = await Dio().post(url);
+    print('response is : ${response.data}');
     return response.data;
   }
 }

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zari/language/app_language.dart';
+import 'package:zari/model/core/have_fun.dart';
 import 'package:zari/util/Dimensions.dart';
 import 'package:zari/util/Images.dart';
 import 'package:zari/util/style.dart';
 
 class BuildHaveFun extends StatelessWidget {
-  const BuildHaveFun({Key? key}) : super(key: key);
+  HaveFun haveFun;
+  BuildHaveFun(this.haveFun, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final langProvider = Provider.of<AppLanguage>(context, listen: false);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -77,7 +82,9 @@ class BuildHaveFun extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Al-Azhar Park',
+                      langProvider.appLanguage == "en"
+                          ? '${haveFun.title}'
+                          : '${haveFun.artitle}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
@@ -89,7 +96,7 @@ class BuildHaveFun extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Parks',
+                          '${haveFun.address}',
                           maxLines: 5,
                           style: TextStyle(
                             color: Colors.grey,

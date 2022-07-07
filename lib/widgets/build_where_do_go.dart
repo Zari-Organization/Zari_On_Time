@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:zari/language/app_language.dart';
+import 'package:zari/model/core/to_night.dart';
 import 'package:zari/util/Dimensions.dart';
 import 'package:zari/util/Images.dart';
 import 'package:zari/util/style.dart';
 
 class WhereDoIGo extends StatelessWidget {
-  const WhereDoIGo({Key? key}) : super(key: key);
+  ToNight toNight;
+  WhereDoIGo(this.toNight, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final langProvider = Provider.of<AppLanguage>(context, listen: false);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -45,7 +50,9 @@ class WhereDoIGo extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      'Escape Through Music with Mix',
+                      langProvider.appLanguage == "en"
+                          ? '${toNight.title}'
+                          : '${toNight.artitle}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
@@ -53,7 +60,9 @@ class WhereDoIGo extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Music',
+                      langProvider.appLanguage == "en"
+                          ? '${toNight.catName}'
+                          : '${toNight.catArname}',
                       maxLines: 5,
                       style: TextStyle(
                         color: Colors.grey,
@@ -75,7 +84,7 @@ class WhereDoIGo extends StatelessWidget {
                               color: Colors.grey,
                             ),
                             Text(
-                              'Sheikh Zayed',
+                              '${toNight.address}',
                               maxLines: 2,
                               style: TextStyle(
                                 color: Colors.grey,
@@ -103,7 +112,9 @@ class WhereDoIGo extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'whom',
+                          langProvider.appLanguage == "en"
+                              ? '${toNight.catName}'
+                              : '${toNight.catArname}',
                           maxLines: 2,
                           style: TextStyle(
                             color: Colors.grey,

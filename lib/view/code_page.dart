@@ -71,7 +71,7 @@ class _CodePageState extends State<CodePage> {
                     //  Image.asset("assets/images/logo.png", height: 100),
                     SizedBox(height: 60),
                     CustomField(
-                      title: localize(context, "code"),
+                      //  title: localize(context, "code"),
                       controller: code,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -83,6 +83,7 @@ class _CodePageState extends State<CodePage> {
                     CustomButton(
                       title: localize(context, "confirmCode"),
                       onClick: checkCode,
+                      colors: 0,
                     ),
                     SizedBox(
                       height: 10,
@@ -111,7 +112,7 @@ class _CodePageState extends State<CodePage> {
       //   MaterialPageRoute(
       //     builder: (_) => ResetPasswordPage(),
       //   ),
-      //   );
+      // );
       setState(() => loading = true);
       String params = "mobile=${widget.mobile}" "&code=${code.text}";
       await Api.checkOtp(params).then((value) {

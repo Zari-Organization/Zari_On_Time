@@ -31,7 +31,7 @@ class NeedLoginWidget extends StatelessWidget {
               onClick: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => LoginPage(),
+                  builder: (_) => LoginPage('Profile'),
                 ),
               ),
               colors: 0,

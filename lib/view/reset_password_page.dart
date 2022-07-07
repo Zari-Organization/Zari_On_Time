@@ -93,7 +93,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         )),
                     SizedBox(height: 5),
                     CustomField(
-                      title: localize(context, "newPassword"),
+                      //    title: localize(context, "newPassword"),
                       controller: password,
                       obsecure: isVisiblePassword,
                       validator: (value) {
@@ -104,8 +104,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       widget: InkWell(
                         child: Icon(
                           isVisiblePassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                           color: Colors.grey,
                         ),
                         onTap: _toggle,
@@ -122,7 +122,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         )),
                     SizedBox(height: 5),
                     CustomField(
-                      title: localize(context, "confirmPassword"),
+                      ///  title: localize(context, "confirmPassword"),
                       controller: confirmPassword,
                       obsecure: isVisible_CWpassword,
                       validator: (value) {
@@ -134,8 +134,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       widget: InkWell(
                         child: Icon(
                           isVisible_CWpassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                           color: Colors.grey,
                         ),
                         onTap: _toggle_cW,
@@ -143,8 +143,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     ),
                     SizedBox(height: 50),
                     CustomButton(
-                      title: localize(context, "reset"),
+                      title: localize(context, "updatepassword"),
                       onClick: resetPassword,
+                      colors: 0,
                     ),
                   ],
                 ),
@@ -161,18 +162,19 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       //   if (password.text == confirmPassword.text) {
       setState(() => loading = true);
       String params = "mobile=${password.text}";
-      await Api.forgetPassword(params).then((value) {
+      await Api.forgetPassword(params).then((value) async {
         setState(() => loading = false);
         if (value['status'] == true) {
-          Fluttertoast.showToast(msg: value['msg']);
+          await Fluttertoast.showToast(msg: value['msg']);
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (_) => LoginPage(),
+              builder: (_) => LoginPage('First'),
             ),
             (r) => false,
           );
         }
+        await Fluttertoast.showToast(msg: value['msg']);
       });
     }
   }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zari/constants.dart';
 import 'package:zari/providers/pages_provider.dart';
+import 'package:zari/util/Utils.dart';
 import 'package:zari/util/style.dart';
 import 'package:zari/view/about_us_page.dart';
 import 'package:zari/view/booking_page.dart';
@@ -23,7 +24,7 @@ import 'package:zari/view/services_page.dart';
 import 'search_page.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  MainPage({Key? key}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -31,6 +32,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int selectedPage = 0;
+
   void onTabTapped(int index) {
     setState(() {
       print(index);
@@ -38,25 +40,27 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  Map<String, dynamic> pages = {
+    "home": HomePage(),
+    "search": SearchPage(),
+    "profile": ProfilePage(),
+    "more": MorePage(),
+    "history": HistoryPage(),
+    "about": AboutUsPage(),
+    "join": JoinPage(),
+    "contact": ContactPage(),
+    "brands": BrandsPage(''),
+    "branches": BranchesPage(''),
+    "services": ServicesPage(),
+    "book": BookingPage(),
+    "historyDetails": ServiceDetailsPage(),
+  };
   final _pages = [
     HomePage(),
     SearchPage(),
     ProfilePage(),
     MorePage(),
   ];
-  // Map<String, dynamic> pages = {
-  //   "home": HomePage(),
-  //   "history": HistoryPage(),
-  //   "about": AboutUsPage(),
-  //   "join": JoinPage(),
-  //   "contact": ContactPage(),
-  //   "brands": BrandsPage(),
-  //   "branches": BranchesPage(),
-  //   "services": ServicesPage(),
-  //   "book": BookingPage(),
-  //   "historyDetails": ServiceDetailsPage(),
-  //   "profile": ProfilePage(),
-  // };
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +114,9 @@ class _MainPageState extends State<MainPage> {
         //   ],
         // ),
         //  drawer: MenuPage(),
+        //   body: MorePage(),
         body: _pages[selectedPage],
-        //   body: pages[pagesProvider.currentPage],
+        // body: pages[pagesProvider.currentPage],
         bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(25), topRight: Radius.circular(25)),
@@ -151,8 +156,8 @@ class _MainPageState extends State<MainPage> {
                   label: localize(context, "more")!,
                 ),
               ],
+
               currentIndex: selectedPage,
-              // currentIndex: pagesProvider.currentPage,
               //    selectedItemColor: Colors.amber[800],
               onTap: onTabTapped,
             ),

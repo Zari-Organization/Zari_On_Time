@@ -21,7 +21,7 @@ class _MessagePageState extends State<MessagePage> {
   @override
   void initState() {
     Timer(
-      Duration(seconds: 2),
+      Duration(seconds: 3),
       () {
         Navigator.pushAndRemoveUntil(
           context,

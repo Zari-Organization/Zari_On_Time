@@ -123,6 +123,10 @@ class _BrandsPageState extends State<BrandsPage> {
   }
 
   _buildBrand(Brand brand) {
+    print('brand name is : ${brand.id}');
+    print('brand name is : ${brand.name}');
+    print('brand image is : ${brand.image}');
+    print('brand image is : ${brand.desc}');
     final langProvider = Provider.of<AppLanguage>(context, listen: false);
     final pagesProvider = Provider.of<PagesProvider>(context, listen: false);
     return Card(
@@ -138,7 +142,7 @@ class _BrandsPageState extends State<BrandsPage> {
                     ? brand.name
                     : brand.arname)),
           );
-          //  pagesProvider.setPage("branches");
+          pagesProvider.setPage("branches");
           selectedBrand = brand;
           //  print(brand.);
         },

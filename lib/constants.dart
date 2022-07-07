@@ -4,6 +4,7 @@ import 'package:zari/model/core/branch.dart';
 import 'package:zari/model/core/brand.dart';
 import 'package:zari/model/core/category.dart';
 import 'package:zari/model/core/history.dart';
+import 'package:zari/model/core/offers.dart';
 import 'package:zari/model/core/service.dart';
 import 'package:zari/util/style.dart';
 
@@ -20,6 +21,7 @@ Brand? selectedBrand;
 Branch? selectedBranch;
 Service? selectedService;
 History? selectedHistory;
+Offers? selectedOffers;
 int? currentBookID;
 
 reset() {

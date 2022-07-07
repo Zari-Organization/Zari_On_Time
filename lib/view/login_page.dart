@@ -6,17 +6,20 @@ import 'package:zari/model/core/user.dart';
 import 'package:zari/model/service/api.dart';
 import 'package:zari/prefs/pref_manager.dart';
 import 'package:zari/util/Dimensions.dart';
+import 'package:zari/util/Utils.dart';
 import 'package:zari/util/style.dart';
 import 'package:zari/view/forget_password_page.dart';
 import 'package:zari/view/home_page.dart';
 import 'package:zari/view/register_page.dart';
+import 'package:zari/view/welcome_page.dart';
 import 'package:zari/widgets/custom_button.dart';
 import 'package:zari/widgets/custom_field.dart';
 
 import 'main_page.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  String? routePage;
+  LoginPage(this.routePage);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -48,7 +51,15 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: AppColors.GRAY_APPBAR,
         elevation: 0,
         leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            if (PrefManager.currentUser == null) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => WelcomePage()),
+              );
+            } else {
+              Navigator.of(context).pop();
+            }
+          },
           icon: Icon(
             Icons.arrow_back_ios,
             color: Colors.black,
@@ -216,11 +227,13 @@ class _LoginPageState extends State<LoginPage> {
             setState(() => loading = false);
             /*Fluttertoast.showToast(
                 msg: localize(context, "loggedInSuccessfully")!);*/
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (_) => MainPage()),
-              (route) => false,
-            );
+            Utils.route_Login(widget.routePage ?? '', context);
+            //   Navigator.pop(context, true);
+            // Navigator.pushAndRemoveUntil(
+            //   context,
+            //   MaterialPageRoute(builder: (_) => MainPage()),
+            //   (route) => false,
+            // );
           });
         } else {
           setState(() => loading = false);

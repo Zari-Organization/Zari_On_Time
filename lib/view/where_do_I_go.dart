@@ -6,6 +6,8 @@ import 'package:flutter/src/widgets/ticker_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:zari/constants.dart';
 import 'package:zari/language/app_language.dart';
+import 'package:zari/model/core/to_night.dart';
+import 'package:zari/model/service/api.dart';
 import 'package:zari/providers/pages_provider.dart';
 import 'package:zari/util/Dimensions.dart';
 import 'package:zari/util/Images.dart';
@@ -27,6 +29,14 @@ class WhereDoIGoPage extends StatefulWidget {
 
 class _WhereDoIGoPageState extends State<WhereDoIGoPage>
     with SingleTickerProviderStateMixin {
+  int selectedColor = 0;
+  List<ToNight>? tonighs;
+  getAllToNight() async {
+    await Api.getToNight().then((value) {
+      setState(() => tonighs = value);
+    });
+  }
+
   menuitem? _mitem = menuitem.item1;
   String _groupValue = '';
 
@@ -40,21 +50,23 @@ class _WhereDoIGoPageState extends State<WhereDoIGoPage>
   _search(String text) {
     if (text.isEmpty) {
       print('search1111');
-      //  getCategories();
+      getAllToNight();
     } else {
-      print('search2222');
-      // setState(() {
-      //   searchResult = categories!
-      //       .where((e) => e.name!.toLowerCase().contains(text.toLowerCase()))
-      //       .toList();
-      //   print('categories!.length${searchResult.length}');
+      setState(() {
+        tonighs = tonighs!
+            .where((e) =>
+                e.title!.toLowerCase().contains(text.toLowerCase()) ||
+                e.artitle!.toLowerCase().contains(text.toLowerCase()))
+            .toList();
 
-      // });
+        print('categories!.length${tonighs!.length}');
+      });
     }
   }
 
   @override
   void initState() {
+    getAllToNight();
     super.initState();
   }
 
@@ -83,107 +95,122 @@ class _WhereDoIGoPageState extends State<WhereDoIGoPage>
           ),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 5),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 5,
-                    child: CustomSearch(
-                      title: localize(context, "search"),
-                      controller: search,
-                      search: (v) => _search(v!),
-                      prewidget: Image.asset(
-                        Images.search_icon,
-                        color: Colors.grey,
-                        scale: 7,
+      body: tonighs != null
+          ? Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: CustomSearch(
+                            title: localize(context, "search"),
+                            controller: search,
+                            search: (v) => _search(v!),
+                            prewidget: Image.asset(
+                              Images.search_icon,
+                              color: Colors.grey,
+                              scale: 7,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 2.5),
+                        Expanded(
+                            flex: 1,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (_) => FilterPage()),
+                                );
+                              },
+                              child: Card(
+                                color: Colors.grey.shade300,
+                                margin: EdgeInsets.all(1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                elevation: 2,
+                                child: Image.asset(
+                                  Images.filter_icon,
+                                  scale: 25,
+                                ),
+                              ),
+                            )),
+                        SizedBox(width: 2.5),
+                        Expanded(
+                            flex: 1,
+                            child: InkWell(
+                              onTap: () => showAlertDialog(context),
+                              child: Card(
+                                color: Colors.grey.shade300,
+                                margin: EdgeInsets.all(1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                elevation: 2,
+                                child: Image.asset(
+                                  Images.Swap_icon,
+                                  scale: 25,
+                                ),
+                              ),
+                            )),
+                      ],
+                    ),
+                    SizedBox(height: 5),
+                    Container(
+                      height: 45,
+                      width: double.infinity,
+                      child: ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        itemCount: 10,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => _buildListOffer(index),
                       ),
                     ),
-                  ),
-                  SizedBox(width: 2.5),
-                  Expanded(
-                      flex: 1,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => FilterPage()),
-                          );
-                        },
-                        child: Card(
-                          color: Colors.grey.shade300,
-                          margin: EdgeInsets.all(1),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          elevation: 2,
-                          child: Image.asset(
-                            Images.filter_icon,
-                            scale: 25,
-                          ),
-                        ),
-                      )),
-                  SizedBox(width: 2.5),
-                  Expanded(
-                      flex: 1,
-                      child: InkWell(
-                        onTap: () => showAlertDialog(context),
-                        child: Card(
-                          color: Colors.grey.shade300,
-                          margin: EdgeInsets.all(1),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          elevation: 2,
-                          child: Image.asset(
-                            Images.Swap_icon,
-                            scale: 25,
-                          ),
-                        ),
-                      )),
-                ],
-              ),
-              SizedBox(height: 5),
-              Container(
-                height: 50,
-                width: double.infinity,
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: 10,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => _buildListOffer(),
+                    SizedBox(height: 5),
+                    Expanded(
+                      //height: 200,
+                      //   width: double.infinity,
+                      child: tonighs!.length > 0
+                          ? ListView.builder(
+                              physics: BouncingScrollPhysics(),
+                              itemCount: tonighs!.length,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (context, index) =>
+                                  WhereDoIGo(tonighs![index]),
+                            )
+                          : Center(
+                              child: Text(
+                                localize(context, "noDataFound")!,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 5),
-              Expanded(
-                //height: 200,
-                //   width: double.infinity,
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: 10,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => WhereDoIGo(),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+            )
+          : Center(child: CircularProgressIndicator()),
     );
   }
 
-  _buildListOffer() {
+  _buildListOffer(int index) {
     final langProvider = Provider.of<AppLanguage>(context, listen: false);
     final pagesProvider = Provider.of<PagesProvider>(context, listen: false);
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      color: AppColors.YALLOW_BUTTON,
+      color: selectedColor == index
+          ? AppColors.YALLOW_BUTTON
+          : Colors.grey.shade400,
       elevation: 2,
       child: GestureDetector(
         onTap: () {},

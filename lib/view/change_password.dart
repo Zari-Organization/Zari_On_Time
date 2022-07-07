@@ -195,7 +195,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (_) => LoginPage(),
+              builder: (_) => LoginPage('First'),
             ),
             (r) => false,
           );

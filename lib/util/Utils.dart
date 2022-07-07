@@ -42,6 +42,37 @@ class Utils {
     }
   }
 
+  static route_Login(String route, BuildContext context) {
+    print('indexRoute:  $route');
+    switch (route) {
+      case 'Pop':
+        return Navigator.of(context).pop();
+      case 'Profile':
+        return Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => MainPage()),
+        );
+      case 'More':
+        return Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => MainPage()),
+        );
+      case 'First':
+        return Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => MainPage()),
+          (route) => false,
+        );
+      // case 3:
+      //   return Navigator.of(context).push(
+      //     MaterialPageRoute(builder: (context) => WhereDoIGoPage()),
+      //   );
+
+      default:
+        return Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => MainPage()),
+        );
+    }
+  }
+
   static backgroundColor(int index) {
     switch (index) {
       case 0:
@@ -76,12 +107,23 @@ class Utils {
       default:
         return localize(context, "wheretogo")!;
     }
-    // title = [
-    //   localize(context, "booking")!,
-    //   localize(context, "offers")!,
-    //   localize(context, "havefun")!,
-    //   localize(context, "wheretogo")!,
-    // ];
-    // return title;
+  }
+
+  static select_index(int index) {
+    switch (index) {
+      case 0:
+        return 0;
+
+      case 1:
+        return 1;
+      case 2:
+        return 2;
+
+      case 3:
+        return 3;
+
+      default:
+        return 0;
+    }
   }
 }
