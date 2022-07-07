@@ -63,7 +63,7 @@ flutter_icons:
   macos: true
   windows: true
   web: true
-  image_path: "assets/images/splash.png"  
+  image_path: "assets/images/Zari-logo.png"  
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -49,7 +49,6 @@ class _WhereDoIGoPageState extends State<WhereDoIGoPage>
   TextEditingController search = TextEditingController();
   _search(String text) {
     if (text.isEmpty) {
-      print('search1111');
       getAllToNight();
     } else {
       setState(() {

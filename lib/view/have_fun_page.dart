@@ -12,9 +12,12 @@ import 'package:zari/providers/pages_provider.dart';
 import 'package:zari/util/Dimensions.dart';
 import 'package:zari/util/Images.dart';
 import 'package:zari/util/style.dart';
+import 'package:zari/view/filter_page.dart';
 import 'package:zari/widgets/build_have_fun.dart';
 import 'package:zari/widgets/build_offer.dart';
 import 'package:zari/widgets/custom_search.dart';
+
+enum menuitem { item1, item2, item3, item4 }
 
 class HaveFunPage extends StatefulWidget {
   const HaveFunPage({Key? key}) : super(key: key);
@@ -25,6 +28,7 @@ class HaveFunPage extends StatefulWidget {
 
 class _HaveFunPageState extends State<HaveFunPage>
     with SingleTickerProviderStateMixin {
+  menuitem? _mitem = menuitem.item1;
   int selectedColor = 0;
   TextEditingController search = TextEditingController();
   List<HaveFun>? havefuns;
@@ -37,10 +41,8 @@ class _HaveFunPageState extends State<HaveFunPage>
 
   _search(String text) {
     if (text.isEmpty) {
-      print('search1111');
-      //  getCategories();
+      getAllHaveFun();
     } else {
-      print('search2222');
       setState(() {
         havefuns = havefuns!
             .where((e) =>
@@ -111,7 +113,10 @@ class _HaveFunPageState extends State<HaveFunPage>
                             flex: 1,
                             child: InkWell(
                               onTap: () {
-                                print('filter');
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (_) => FilterPage()),
+                                );
                               },
                               child: Card(
                                 color: Colors.grey.shade300,
@@ -130,9 +135,7 @@ class _HaveFunPageState extends State<HaveFunPage>
                         Expanded(
                             flex: 1,
                             child: InkWell(
-                              onTap: () {
-                                print('swap');
-                              },
+                              onTap: () => showAlertDialog(context),
                               child: Card(
                                 color: Colors.grey.shade300,
                                 margin: EdgeInsets.all(1),
@@ -278,5 +281,147 @@ class _HaveFunPageState extends State<HaveFunPage>
         ),
       ),
     );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+
+    // show the dialog
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => Dialog(
+              backgroundColor: Colors.grey[100],
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16.0))),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  ListTile(
+                    minVerticalPadding: 0,
+                    subtitle: Padding(
+                      padding: EdgeInsets.only(left: 100),
+                      child: Text(' Sort by',
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400)),
+                    ),
+                    trailing: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: CircleAvatar(
+                        radius: 12,
+                        backgroundColor: Colors.black,
+                        child: Icon(
+                          Icons.close,
+                          color: Colors.white,
+                          size: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    minVerticalPadding: 0,
+                    title: Text('Most Bokked',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400)),
+                    trailing: Radio<menuitem>(
+                      activeColor: AppColors.YALLOW_BUTTON,
+                      value: menuitem.item1,
+                      groupValue: _mitem,
+                      onChanged: (menuitem? value) {
+                        setState(() {
+                          _mitem = value;
+                        });
+                      },
+                    ),
+                  ),
+                  Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  ListTile(
+                    title: const Text('Top rated',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400)),
+                    trailing: Radio<menuitem>(
+                      value: menuitem.item2,
+                      activeColor: AppColors.YALLOW_BUTTON,
+                      groupValue: _mitem,
+                      onChanged: (menuitem? value) {
+                        setState(() {
+                          _mitem = value;
+                        });
+                      },
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  ListTile(
+                    title: const Text('Nearby',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400)),
+                    trailing: Radio<menuitem>(
+                      activeColor: AppColors.YALLOW_BUTTON,
+                      value: menuitem.item3,
+                      groupValue: _mitem,
+                      onChanged: (menuitem? value) {
+                        setState(() {
+                          _mitem = value;
+                        });
+                      },
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 1,
+                    color: Colors.grey,
+                  ),
+                  ListTile(
+                    title: const Text('item4'),
+                    trailing: Radio<menuitem>(
+                      activeColor: AppColors.YALLOW_BUTTON,
+                      value: menuitem.item4,
+                      groupValue: _mitem,
+                      onChanged: (menuitem? value) {
+                        setState(() {
+                          _mitem = value;
+                        });
+                      },
+                    ),
+                  ),
+                  Center(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                          width: 160,
+                          height: 40,
+                          decoration: const BoxDecoration(
+                              color: AppColors.YALLOW_BUTTON,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
+                          child: const Center(
+                            child: Text('APPLY',
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white)),
+                          )),
+                    ),
+                  ),
+                ],
+              ),
+            ));
   }
 }

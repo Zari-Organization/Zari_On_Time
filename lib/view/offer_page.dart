@@ -36,8 +36,8 @@ class _OfferPageState extends State<OfferPage>
   TextEditingController search = TextEditingController();
   _search(String text) {
     if (text.isEmpty) {
+      getAllOffers();
       print('search1111');
-      //  getCategories();
     } else {
       print('search2222');
       setState(() {
